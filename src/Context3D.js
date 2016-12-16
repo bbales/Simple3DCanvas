@@ -125,9 +125,16 @@ export default class Context3D {
         return newPoint;
     }
 
+    drawPoint3d(point) {
+        let two = point.twoD
+        this.drawRect(two.x, two.y, 2, 2)
+    }
+
     loop() {
         // Clear canvas
         this.ctx.clearRect(0, 0, this.width + 1, this.height + 1)
+        this.drawRect(100, 100, 20, 20)
+        console.log(1)
     }
 
     init() {
@@ -135,7 +142,7 @@ export default class Context3D {
         this.ctx.translate(0.5, 0.5)
 
         // Start animation loop
-        this.interval = setInterval(this.loop.bind(this), 1000 / 10)
+        this.interval = setInterval(this.loop.bind(this), 1000 / 1)
     }
 
     stop() {
