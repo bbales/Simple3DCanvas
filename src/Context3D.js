@@ -17,8 +17,6 @@ export default class Context3D {
             if (e.altKey && e.shiftKey) window.camera.x += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
             else if (e.shiftKey) window.camera.y += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
             else window.camera.z += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
-
-            console.log(window.camera)
         })
     }
 
@@ -131,15 +129,12 @@ export default class Context3D {
     }
 
     drawLine3d(p1, p2) {
-        console.log(p2.twoD)
         this.drawLine(p1.twoD, p2.twoD)
     }
 
     loop() {
         // Clear canvas
         this.ctx.clearRect(0, 0, this.width + 1, this.height + 1)
-        this.drawRect(100, 100, 20, 20)
-        console.log(1)
     }
 
     init() {

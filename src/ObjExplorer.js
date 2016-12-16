@@ -23,7 +23,6 @@ export default class ObjExplorer extends Context3D {
     }
 
     parseRow(row) {
-        console.log(row)
         switch (row[0]) {
             case 'g': // Group Name
 
