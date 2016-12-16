@@ -22,7 +22,7 @@ export default class Context3D {
         })
     }
 
-    startPath(w = 10, s = '#791b1b') {
+    startPath(w = 1, s = '#791b1b') {
         this.ctx.lineWidth = w
         this.ctx.fillStyle = s
         this.ctx.strokeStyle = s
@@ -128,6 +128,11 @@ export default class Context3D {
     drawPoint3d(point) {
         let two = point.twoD
         this.drawRect(two.x, two.y, 2, 2)
+    }
+
+    drawLine3d(p1, p2) {
+        console.log(p2.twoD)
+        this.drawLine(p1.twoD, p2.twoD)
     }
 
     loop() {

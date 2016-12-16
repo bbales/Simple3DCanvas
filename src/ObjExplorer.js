@@ -6,6 +6,7 @@ export default class ObjExplorer extends Context3D {
     constructor() {
         super(800, 800, 'canvas')
         this._vertices = []
+        this._edges = []
     }
 
     load(e) {
@@ -18,6 +19,7 @@ export default class ObjExplorer extends Context3D {
             lines.forEach(l => this.parseRow(l))
         }
         reader.readAsText(f);
+        this.init()
     }
 
     parseRow(row) {
@@ -30,11 +32,13 @@ export default class ObjExplorer extends Context3D {
                 if (row[1] == 'n') break
 
                 // Split coords
-                let coords = row.replace(/  /g, ' ').split(' ').slice(1).map(parseFloat)
-                this._vertices.push(new Point3(coords[0] + 400, coords[1] + 400, coords[2] + 400))
+                let coords = row.replace(/  /g, ' ').split(' ').slice(1).map(v => parseFloat(v))
+                this._vertices.push(new Point3(coords[0], coords[1], coords[2]))
                 break
             case 'f': // Face
-
+                // Split edges into connected vertices - can have length of 3 or greater
+                let edges = row.replace(/  /g, ' ').split(' ').slice(1).map(v => parseInt(v))
+                this._edges.push(edges)
                 break
         }
     }
@@ -42,9 +46,10 @@ export default class ObjExplorer extends Context3D {
     loop() {
         super.loop()
 
-        // Draw obj
-        this._vertices.forEach(v => {
-            this.drawPoint3d(v)
+        // Draw vertices
+        // this._vertices.forEach(v => this.drawPoint3d(v))
+        this._edges.forEach(e => {
+            for (let i = 1; i < e.length; i++) this.drawLine3d(this._vertices[e[i - 1] - 1], this._vertices[e[i] - 1])
         })
     }
 }
