@@ -3,8 +3,10 @@ import Point2 from './Point2'
 export default class Point3 {
     constructor(x, y, z) {
         this.x = x
-        this.y = y;
-        this.z = z;
+        this.y = y
+        this.z = z
+
+        this.p2 = new Point2(0,0)
     }
 
     get twoD() {
@@ -14,31 +16,38 @@ export default class Point3 {
         let cy = 0
         let cz = 250
 
-        let bx = (cz * (rotated[0] - cx) / (rotated[2] + cz)) + cx
-        let by = (cz * (rotated[1] - cy) / (rotated[2] + cz)) + cy
+        this.p2.x = (cz * (rotated[0] - cx) / (rotated[2] + cz)) + cx
+        this.p2.y = (cz * (rotated[1] - cy) / (rotated[2] + cz)) + cy
 
-        return new Point2(bx, by)
+        return this.p2
     }
 
     rotate(ax, ay, az) {
-        let temp = 0;
+        let temp = 0
 
         let xx = this.x
         let yy = this.y
         let zz = this.z
 
+        let cx = Math.cos(ax)
+        let cy = Math.cos(ay)
+        let cz = Math.cos(az)
+        let sx = Math.sin(ax)
+        let sy = Math.sin(ay)
+        let sz = Math.sin(az)
+
         temp = yy
-        yy = (yy * Math.cos(ax)) - (zz * Math.sin(ax));
-        zz = (temp * Math.sin(ax)) + (zz * Math.cos(ax));
+        yy = yy * cx - zz * sx
+        zz = temp * sx + zz * cx
 
         temp = zz
-        zz = (zz * Math.cos(ay)) - (xx * Math.sin(ay));
-        xx = (temp * Math.sin(ay)) + (xx * Math.cos(ay));
+        zz = zz * cy - xx * sy
+        xx = temp * sy + xx * cy
 
         temp = xx
-        xx = (xx * Math.cos(az)) - (yy * Math.sin(az));
-        yy = (temp * Math.sin(az)) + (yy * Math.cos(az));
+        xx = xx * cz - yy * sz
+        yy = temp * sz + yy * cz
 
-        return [xx, yy, zz];
+        return [xx, yy, zz]
     }
 }

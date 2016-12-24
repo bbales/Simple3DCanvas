@@ -8,4 +8,4 @@ window.camera = {
 
 let explorer = new ObjExplorer(800, 800, 'canvas')
 
-document.getElementById('files').addEventListener('change', explorer.load.bind(explorer), false);
+document.getElementById('files').addEventListener('change', explorer.load.bind(explorer), false)

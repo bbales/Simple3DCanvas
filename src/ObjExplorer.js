@@ -18,18 +18,16 @@ export default class ObjExplorer extends Context3D {
             lines = _.filter(lines, l => !(!l.length || l[0] == '#'))
             lines.forEach(l => this.parseRow(l))
         }
-        reader.readAsText(f);
+        reader.readAsText(f)
         this.init()
     }
 
     parseRow(row) {
         switch (row[0]) {
             case 'g': // Group Name
-
                 break
             case 'v': // Vertex
                 if (row[1] == 'n') break
-
                 // Split coords
                 let coords = row.replace(/  /g, ' ').split(' ').slice(1).map(v => parseFloat(v))
                 this._vertices.push(new Point3(coords[0], coords[1], coords[2]))
@@ -40,6 +38,12 @@ export default class ObjExplorer extends Context3D {
                 this._edges.push(edges)
                 break
         }
+    }
+
+    reset(){
+        this.stop()
+        this._vertices = []
+        this._edges = []
     }
 
     loop() {

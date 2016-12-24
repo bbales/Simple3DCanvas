@@ -13,7 +13,7 @@ export default class Context3D {
         this.centerPoint = new Point3(0, 0, 0)
 
         // Camera orbit
-        document.querySelector('canvas').addEventListener('mousewheel', (e) => {
+        document.querySelector('canvas').addEventListener('mousewheel', e => {
             if (e.altKey && e.shiftKey) window.camera.x += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
             else if (e.shiftKey) window.camera.y += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
             else window.camera.z += 0.025 * ((e.wheelDelta > 0) ? -1 : 1)
@@ -49,10 +49,12 @@ export default class Context3D {
             right: new Point2(x + cos90 * width / 2, y + sin90 * width / 2),
             left: new Point2(x - cos90 * width / 2, y - sin90 * width / 2)
         }
+
         let upper = {
             right: new Point2(middle.right.x - cos * height / 2, middle.right.y - sin * height / 2),
             left: new Point2(middle.left.x - cos * height / 2, middle.left.y - sin * height / 2)
         }
+
         let lower = {
             right: new Point2(middle.right.x + cos * height / 2, middle.right.y + sin * height / 2),
             left: new Point2(middle.left.x + cos * height / 2, middle.left.y + sin * height / 2)
